@@ -9,6 +9,9 @@ namespace Solarflare.StrapiAPI
     [ContentCollection("prize-draw-entries")]
     public class PrizeDrawEntry : Content
     {
+        [ContentName("id")]
+        public string Id { get; set; }
+        
         /// <summary>
         /// Email data from strapi
         /// </summary>
