@@ -27,7 +27,6 @@ namespace StrapiAPITests
         
         PrizeDrawEntry prizeDrawEntry = new PrizeDrawEntry
         {
-            Id = "3326",
             Email = "Update@Update.com",
             FullName = "Update Record",
             Age = "131",
@@ -41,52 +40,56 @@ namespace StrapiAPITests
             Password = "Leg0p@ss"
         };
 
-        [Fact]
+        // Passed -> True is returned
+        [Fact(Skip = "Remove skip to run")]
         public void TestLogin()
         {
             Assert.True(StrapiService.Login(loginInfo).Result);
         }
         
-        [Fact(Skip = "Manually run, remove skip")]
+        // Passed -> Strapi Disabled for getting entry with id
+        [Fact(Skip = "Remove skip to run")]
         public void TestGet()
         {
-
             bool isLoggedIn = StrapiService.Login(loginInfo).Result;
-            var test = StrapiService.Get<CompetitionEntry>("34");
-            testOutputHelper.WriteLine(StrapiService.Get<CompetitionEntry>("").Result);
-            //testOutputHelper.WriteLine(StrapiService.Get("prize-draw-entries", "").Result);
+            testOutputHelper.WriteLine(StrapiService.Get(prizeDrawEntry).Result);
         }
         
+        // Passed -> Record is created in strapi library
         [Fact(Skip = "Remove skip to run")]
         public void TestCreate()
         {
             bool isLoggedIn = StrapiService.Login(loginInfo).Result;
             testOutputHelper.WriteLine(StrapiService.Create(prizeDrawEntry).Result);
         }
-        
-        /*[Fact(Skip = "Manually run, remove skip")]
-        public void TestUpdate()
-        {
-            Assert.True(StrapiService.Update("Email", new RequestData() {id = 1}).Result);
 
-        }*/
-
-        [Fact]
-        public void TestGetFileUrl()
-        {
-            bool isLoggedIn = StrapiService.Login(loginInfo).Result;
-            string url = JObject.Parse(StrapiService.GetFile("1102").Result)["url"]?.ToString() ?? string.Empty;
-            
-            testOutputHelper.WriteLine(url);
-        }
-
-        [Fact]
+        // Passed -> Strapi Disabled for updating entries
+        [Fact(Skip = "Skip, remove to run")]
         public void TestUpdate()
         {
             bool isLoggedIn = StrapiService.Login(loginInfo).Result;
             testOutputHelper.WriteLine(StrapiService.Update(prizeDrawEntry).Result);
         }
         
+        
+        // Passed -> Strapi Disabled for deleting entries
+        [Fact(Skip = "Skip, remove to run")]
+        public void TestDelete()
+        {
+            bool isLoggedIn = StrapiService.Login(loginInfo).Result;
+            testOutputHelper.WriteLine(StrapiService.Del("3326").Result);
+        }
+        
+        // Passed -> Data returned
+        [Fact(Skip = "Skip, remove to run")]
+        public void TestGetFile()
+        {
+            bool isLoggedIn = StrapiService.Login(loginInfo).Result;
+
+            testOutputHelper.WriteLine(StrapiService.GetFile("1102").Result);
+        }
+        
+        // Passed -> Jwt is written to console {JWT currently made public, will need to be made private}
         [Fact]
         public void OutputJwt()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,7 @@ namespace Solarflare.StrapiAPI
         public string Jwt { get; set; }
         
         private string Authorization { get; set; }
-        
-        // Public only for testing purposes
-        public RequestData RequestData = new();
-    
+
         public StrapiService(string backEndUrl)
         {
             if (string.IsNullOrEmpty(backEndUrl)) throw new ArgumentNullException(nameof(backEndUrl));
@@ -33,9 +31,7 @@ namespace Solarflare.StrapiAPI
         /// Logs in to Strapi backend with username and password
         /// Throws an error if login is unsuccessful
         /// </summary>
-        /// <param name="userName">Username passed through interface</param>
-        /// <param name="password">Password passed through interface</param>
-        /// <param name="loginInfo"></param>
+        /// <param name="loginInfo">Content class with username and password attributes</param>
         /// <returns>Returns True is login is successful</returns>
         public async Task<bool> Login<T>(T loginInfo) where T : Content
         {
@@ -46,7 +42,7 @@ namespace Solarflare.StrapiAPI
             
             string contentString = loginInfo.ToString();
             
-            StringContent outputData = BuildRequest(url, contentString);
+            StringContent outputData = BuildRequest(contentString);
 
 
             using HttpClient client = new ();
@@ -72,78 +68,44 @@ namespace Solarflare.StrapiAPI
         /// <summary>
         /// Retrieves a content record from strapi
         /// </summary>
-        /// <param name="contentType">The type of the collection. This will be the plural form of the type. For example `customers` to retrieve a customer record.</param>
-        /// <param name="id">Id of the record. If provided, the record with the matching id will be returned. When omitted, the entire collection will be returned.</param>
-        /// <returns></returns>
+        /// <param name="content">content class with id is to be provided. If no id, all data will be returned</param>
+        /// <returns>string format of the record</returns>
         /// <exception cref="Exception"></exception>
-        public async Task<string> Get<T>(string id) where T : Content
+        public async Task<string> Get<T>(T content) where T : Content
         {
-            if(id == null)
-                throw new Exception($"id: {nameof(id)} must be provided");
+            if(content == null)
+                throw new Exception($"content: {nameof(content)} must be provided");
             
+            string contentString = content.ToString();
             
-            Uri url = new (BuildUrl("", id));
-
-            using HttpClient client = new();
-            
-            string result;
-            
-            using HttpRequestMessage request = new (HttpMethod.Get, url);
-            
-            SetRequestAuthorizationHeader(client);
-
-            HttpResponseMessage response = await client.SendAsync(request);
-            result = response.Content.ReadAsStringAsync().Result;
-
-            //T content = JsonConvert.DeserializeObject<T>(result, new ContentConverter());
-            
-            return result;
-        }
-
-        /*public async Task<string> Get(string contentType, string id)
-        {
-            if (id == null)
-                throw new Exception($"id: {nameof(id)} must be provided");
-
-
-            Uri url = new(BuildUrl(contentType, id));
+            Uri url = new (BuildUrl(content.Name, JObject.Parse(contentString)["id"]?.ToString() ?? ""));
 
             using HttpClient client = new();
 
             string result;
-
             try
             {
-                using HttpRequestMessage request = new(HttpMethod.Get, url);
-
                 SetRequestAuthorizationHeader(client);
-
-                HttpResponseMessage response = await client.SendAsync(request);
+                
+                HttpResponseMessage response = await client.GetAsync(url);
+            
                 result = response.Content.ReadAsStringAsync().Result;
+
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Getting {contentType} / failed {e}");
-                throw;
+                Console.WriteLine($"Getting {content} / failed {e}");
+                return $"{e}";
             }
 
-            BuildDataForFiles test = new();
-
-            string newTest = test.ConvertJsonToCsv(result, ",");
-            test.WriteToCsvFile(newTest);
-            
-
-            return newTest;
-            
-        }*/
+            return result;
+        }
 
         /// <summary>
         /// Creates a new content record on Strapi.
         /// </summary>
-        /// <param name="contentType">The type of the collection. This will be the plural form of the type. For example `customers` to retrieve a customer record.</param>
-        /// <param name="data">Object that contains the data required to create a new record of `contentType` type.</param>
-        /// <param name="content"></param>
-        /// <returns></returns>
+        /// <param name="content">content, of type class Content, is passed as param with data corresponding to each property</param>
+        /// <returns>The id of the record created, is returned</returns>
         /// <exception cref="Exception"></exception>
         public async Task<string> Create<T>(T content) where T : Content
         {
@@ -155,7 +117,7 @@ namespace Solarflare.StrapiAPI
             string contentString = content.ToString();
 
             //Content jsonObject = JsonConvert.DeserializeObject<Content>(contentString, new ContentConverter()) ?? throw new InvalidOperationException();
-            StringContent outputData = BuildRequest(url, contentString);
+            StringContent outputData = BuildRequest(contentString);
             
             using HttpClient client = new();
 
@@ -179,17 +141,15 @@ namespace Solarflare.StrapiAPI
 
             return contentId;
         }
-        
+
         /// <summary>
         /// Updates an already existing content record on Strapi.
         /// </summary>
-        /// <param name="contentType">The type of the collection. This will be the plural form of the type. For example `customers` to retrieve a customer record.</param>
-        /// <param name="data">Object that contains the updated fields of the record. It also needs to contain the `id` field to match the existing record.</param>
-        /// <returns>True if request succeeds, false if request fails</returns>
+        /// <param name="content">content, of type class Content, is passed as param</param>
+        /// <returns>returns the response from the request as string</returns>
         /// <exception cref="Exception"></exception>
         public async Task<string> Update<T>(T content) where T : Content
         {
-            // sep
             if(content == null)
                 throw new Exception($"content: {nameof(content)} must be provided");
 
@@ -200,7 +160,7 @@ namespace Solarflare.StrapiAPI
 
             Uri url = new (BuildUrl(content.Name, JObject.Parse(contentString)["id"]?.ToString() ?? throw new InvalidOperationException()));
 
-            StringContent outputData = BuildRequest(url, contentString);
+            StringContent outputData = BuildRequest(contentString);
 
             using HttpClient client = new();
 
@@ -221,48 +181,46 @@ namespace Solarflare.StrapiAPI
 
             return result;
         }
-        
+
         /// <summary>
         /// Deletes a content record from Strapi.
         /// </summary>
-        /// <param name="contentType">The type of the collection. This will be the plural form of the type. For example `customers` to retrieve a customer record.</param>
         /// <param name="id">Id of the record.</param>
-        /// <returns>true if Delete is successful.</returns>
+        /// <returns>string of the request result is returned</returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> Del(string contentType, string id)
+        public async Task<string> Del(string id)
         {
-            if(contentType == null)
-                throw new Exception($"contentType: {nameof(contentType)} must be provided");
-            
             if(id == null)
-                throw new Exception($"id: {nameof(id)} must be provided");
-            
-            Uri url = new(BuildUrl(contentType, id));
-            
+                throw new Exception($"contentType: {nameof(id)} must be provided");
+
+            Uri url = new (BuildUrl("prize-draw-entries", id));
+
+            string result;
 
             using HttpClient client = new();
 
             try
             {
-                using HttpRequestMessage request = new (HttpMethod.Delete, url);
                 SetRequestAuthorizationHeader(client);
 
-                await client.SendAsync(request);
+                HttpResponseMessage response = await client.DeleteAsync(url);
+                
+                result = response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Deleting {contentType} / {id} failed {e}");
-                return false;
+                Console.WriteLine($"Deleting {id} / failed {e}");
+                return $"{e}";
             }
 
-            return true;
+            return result;
         }
         
         /// <summary>
-        /// Gets the data corresponding to a file that was previously uploaded.
+        /// Gets the data, as a string, corresponding to a file that was previously uploaded.
         /// </summary>
         /// <param name="fileId">The id of the file.</param>
-        /// <returns>The file.</returns>
+        /// <returns>String containing all the file data</returns>
         /// <exception cref="Exception"></exception>
         public async Task<string> GetFile(string fileId)
         {
@@ -294,39 +252,6 @@ namespace Solarflare.StrapiAPI
             return result;
         }
         
-        /*public async Task<string> UploadFile(string fileId, string fileName)
-        {
-            if(fileId == null)
-                throw new Exception($"fileId: {nameof(fileId)} must be provided");
-            
-            if(fileName == null)
-                throw new Exception($"fileName: {nameof(fileName)} must be provided");
-
-            
-            var url = new Uri(BuildUrl("upload/files", fileId));
-            
-            StringContent request = BuildRequest(url, data);
-
-            using var client = new HttpClient();
-            
-            string result;
-            
-            try
-            {
-                var response = await client.PutAsync(url, request);
-            
-                result = response.Content.ReadAsStringAsync().Result;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Getting data of file {fileId} / failed {e}");
-                throw;
-            }
-            
-            return result;
-        }*/
-        
-                
         /// <summary>
         /// Responsible for building the correctly formatted url to use for requests
         /// </summary>
@@ -343,11 +268,14 @@ namespace Solarflare.StrapiAPI
             return url;
         }
 
-        private StringContent BuildRequest(Uri url, string data)
+        /// <summary>
+        /// Responsible for building string content data that can be sent via the request
+        /// </summary>
+        /// <param name="data">string of json format which contains the data to be sent</param>
+        /// <returns>returns string content data</returns>
+        /// <exception cref="Exception"></exception>
+        private StringContent BuildRequest(string data)
         {
-            if (url == null)
-                throw new Exception($"url: {nameof(url)} must be provided");
-
             if (data == null)
                 throw new Exception($"data: {nameof(data)} must be provided");
             
@@ -366,7 +294,5 @@ namespace Solarflare.StrapiAPI
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Jwt);
         }
-        
-        
     }
 }
