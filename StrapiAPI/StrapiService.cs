@@ -153,7 +153,7 @@ namespace Solarflare.StrapiAPI
             Uri url = new (BuildUrl(content.Name, ""));
             
             string contentString = content.ToString();
-            
+
             //Content jsonObject = JsonConvert.DeserializeObject<Content>(contentString, new ContentConverter()) ?? throw new InvalidOperationException();
             StringContent outputData = BuildRequest(url, contentString);
             
@@ -187,34 +187,40 @@ namespace Solarflare.StrapiAPI
         /// <param name="data">Object that contains the updated fields of the record. It also needs to contain the `id` field to match the existing record.</param>
         /// <returns>True if request succeeds, false if request fails</returns>
         /// <exception cref="Exception"></exception>
-        /*public async Task<bool> Update(string contentType, RequestData data)
+        public async Task<string> Update<T>(T content) where T : Content
         {
-            if(contentType == null)
-                throw new Exception($"contentType: {nameof(contentType)} must be provided");
+            // sep
+            if(content == null)
+                throw new Exception($"content: {nameof(content)} must be provided");
+
+            string contentString = content.ToString();
             
-            if(data.id == null)
-                throw new Exception($"data: {nameof(data)} must have an ID");
-            
-            Uri url = new (BuildUrl(contentType, data.id.ToString()));
-            
-            StringContent request = BuildRequest(url, data);
+            if(JObject.Parse(contentString)["id"]?.ToString() == null)
+                throw new Exception($"Method: {nameof(content)} must have an ID");
+
+            Uri url = new (BuildUrl(content.Name, JObject.Parse(contentString)["id"]?.ToString() ?? throw new InvalidOperationException()));
+
+            StringContent outputData = BuildRequest(url, contentString);
 
             using HttpClient client = new();
 
+            string result;
+            
             try
             {
                 SetRequestAuthorizationHeader(client);
                 
-                await client.PutAsync(url, request);
+                HttpResponseMessage response = await client.PutAsync(url, outputData);
+                result = response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Updating {contentType} / {data.id} failed {e}");
-                return false;
+                Console.WriteLine($"Updating {content} / failed {e}");
+                return $"{e}";
             }
 
-            return true;
-        }*/
+            return result;
+        }
         
         /// <summary>
         /// Deletes a content record from Strapi.
@@ -337,36 +343,6 @@ namespace Solarflare.StrapiAPI
             return url;
         }
 
-        /// <summary>
-        /// Handles building the requests to be sent
-        /// The requests are converted to JSON and build as string format
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        /*private StringContent BuildRequest<T>(Uri url, T data) where T : Content
-        {
-            if (url == null)
-                throw new Exception($"url: {nameof(url)} must be provided");
-
-            if (data == null)
-                throw new Exception($"data: {nameof(data)} must be provided");
-
-            /*if (!string.IsNullOrEmpty(data.jwt))
-            {
-                data.Authorization = data.jwt;
-            }#1#
-            
-            //string rawData = JsonConvert.SerializeObject(data);
-            
-            string serializedMessage = JsonConvert.SerializeObject(data, new ContentConverter());
-            
-            StringContent outputData = new(serializedMessage, Encoding.UTF8, "application/json");
-
-            return outputData;
-        }*/
-        
         private StringContent BuildRequest(Uri url, string data)
         {
             if (url == null)
@@ -389,7 +365,6 @@ namespace Solarflare.StrapiAPI
         private void SetRequestAuthorizationHeader(HttpClient client)
         {
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Jwt);
-            //client.DefaultRequestHeaders.Add("page", "10");
         }
         
         

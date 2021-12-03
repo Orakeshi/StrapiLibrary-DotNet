@@ -27,11 +27,12 @@ namespace StrapiAPITests
         
         PrizeDrawEntry prizeDrawEntry = new PrizeDrawEntry
         {
-            Email = "eheh@googlhttemail.com",
-            FullName = "hey",
-            Age = "26",
-            PhoneNumber = "0303949493939",
-            Address = "tegrgrhrrhrhrst"
+            Id = "3326",
+            Email = "Update@Update.com",
+            FullName = "Update Record",
+            Age = "131",
+            PhoneNumber = "00099292929292",
+            Address = "UpdateStrt",
         };
         
         LoginEntry loginInfo = new LoginEntry
@@ -70,12 +71,20 @@ namespace StrapiAPITests
 
         }*/
 
-        [Fact] public void TestGetFileUrl()
+        [Fact]
+        public void TestGetFileUrl()
         {
             bool isLoggedIn = StrapiService.Login(loginInfo).Result;
             string url = JObject.Parse(StrapiService.GetFile("1102").Result)["url"]?.ToString() ?? string.Empty;
             
             testOutputHelper.WriteLine(url);
+        }
+
+        [Fact]
+        public void TestUpdate()
+        {
+            bool isLoggedIn = StrapiService.Login(loginInfo).Result;
+            testOutputHelper.WriteLine(StrapiService.Update(prizeDrawEntry).Result);
         }
         
         [Fact]
