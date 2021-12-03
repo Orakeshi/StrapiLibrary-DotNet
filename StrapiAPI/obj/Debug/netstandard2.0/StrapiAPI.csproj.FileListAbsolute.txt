@@ -1,0 +1,30 @@
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.AssemblyReference.cache
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfoInputs.cache
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfo.cs
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.CoreCompileInputs.cache
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.deps.json
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.dll
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.pdb
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.dll
+D:/Code/GitHub/Work/Solarflare Studio/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.pdb
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.deps.json
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.dll
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.pdb
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.AssemblyReference.cache
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfoInputs.cache
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfo.cs
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.CoreCompileInputs.cache
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.dll
+/Users/tommy/Documents/Code/C#/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.pdb
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.deps.json
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.dll
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/bin/Debug/netstandard2.0/StrapiAPI.pdb
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.AssemblyReference.cache
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfoInputs.cache
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.AssemblyInfo.cs
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.csproj.CoreCompileInputs.cache
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.dll
+/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/Debug/netstandard2.0/StrapiAPI.pdb
