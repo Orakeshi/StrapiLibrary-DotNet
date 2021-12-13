@@ -1,8 +1,8 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a28c61d8_002De067_002D4784_002Da292_002Da1594c8f1c23/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="StrapiAPIInterfaceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::C931EB01-2BFA-44B8-A967-8A70243FE3E6::net6.0::StrapiAPITests.StrapiApiServiceTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a28c61d8_002De067_002D4784_002Da292_002Da1594c8f1c23/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="StrapiAPIInterfaceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::C931EB01-2BFA-44B8-A967-8A70243FE3E6::net6.0::StrapiAPITests.StrapiApiServiceTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

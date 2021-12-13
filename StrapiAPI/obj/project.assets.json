@@ -2504,19 +2504,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/tommy/.nuget/packages/": {}
+    "C:\\Users\\tommy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/StrapiAPI.csproj",
+      "projectUniqueName": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPI\\StrapiAPI.csproj",
       "projectName": "StrapiAPI",
-      "projectPath": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/StrapiAPI.csproj",
-      "packagesPath": "/Users/tommy/.nuget/packages/",
-      "outputPath": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/obj/",
+      "projectPath": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPI\\StrapiAPI.csproj",
+      "packagesPath": "C:\\Users\\tommy\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/tommy/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\tommy\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
@@ -2565,7 +2565,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/Users/tommy/.dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

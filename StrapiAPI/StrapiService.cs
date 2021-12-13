@@ -17,7 +17,7 @@ namespace Solarflare.StrapiAPI
     {
         private string BackEndUrl { get; set; }
 
-        public string Jwt { get; set; }
+        private string Jwt { get; set; }
         
         private string Authorization { get; set; }
 
@@ -40,6 +40,48 @@ namespace Solarflare.StrapiAPI
             
             Uri url = new (BuildUrl("auth/local", ""));
             
+            string contentString = loginInfo.ToString();
+            
+            StringContent outputData = BuildRequest(contentString);
+
+
+            using HttpClient client = new ();
+
+            string result;
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync(url, outputData);
+            
+                result = response.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            Jwt = JObject.Parse(result)["jwt"]?.ToString() ?? throw new InvalidOperationException();
+            Authorization = Jwt;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Logs in to Strapi backend with username and password
+        /// Throws an error if login is unsuccessful
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns>Returns True is login is successful</returns>
+        public async Task<bool> Login(string userName, string password)
+        {
+            Uri url = new (BuildUrl("auth/local", ""));
+
+            LoginEntry loginInfo = new()
+            {
+                Identifier = userName,
+                Password = password
+            };
+        
             string contentString = loginInfo.ToString();
             
             StringContent outputData = BuildRequest(contentString);
@@ -260,7 +302,7 @@ namespace Solarflare.StrapiAPI
         /// <returns></returns>
         private string BuildUrl(string contentType, string id)
         {
-            string url = BackEndUrl + contentType;
+            string url = BackEndUrl + contentType/*+"?_start=3000&_limit=100"*/;
             if (!string.IsNullOrEmpty(id))
             {
                 url += "/" + id;

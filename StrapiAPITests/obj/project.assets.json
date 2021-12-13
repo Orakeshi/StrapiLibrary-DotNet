@@ -5733,19 +5733,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/tommy/.nuget/packages/": {}
+    "C:\\Users\\tommy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPITests/StrapiAPITests.csproj",
+      "projectUniqueName": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPITests\\StrapiAPITests.csproj",
       "projectName": "StrapiAPITests",
-      "projectPath": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPITests/StrapiAPITests.csproj",
-      "packagesPath": "/Users/tommy/.nuget/packages/",
-      "outputPath": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPITests/obj/",
+      "projectPath": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPITests\\StrapiAPITests.csproj",
+      "packagesPath": "C:\\Users\\tommy\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPITests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/tommy/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\tommy\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -5757,8 +5757,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/StrapiAPI.csproj": {
-              "projectPath": "/Users/tommy/Documents/Dev/Solarflare/Libraries/StrapiAPI/StrapiAPI/StrapiAPI.csproj"
+            "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPI\\StrapiAPI.csproj": {
+              "projectPath": "D:\\Code\\GitHub\\Work\\Solarflare Studio\\Libraries\\Strapi-Library\\StrapiAPI\\StrapiAPI.csproj"
             }
           }
         }
@@ -5809,7 +5809,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/tommy/.dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
